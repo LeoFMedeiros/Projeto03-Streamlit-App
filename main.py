@@ -117,8 +117,8 @@ def futebol():
         time_1 = st.selectbox('Escolha o time da análise', times)
 
     # FILTRAGEM DOS ÚTIMOS 5 JOGOS DOS TIMES EM CASA E FORA
-    df_home_coluna_1 = df[df['Home'] == time_1].reset_index(drop=True)
-    df_away_coluna_1 = df[df['Away'] == time_1].reset_index(drop=True)
+    df_home_coluna_1 = df[df['Home'] == time_1].tail(5).reset_index(drop=True)
+    df_away_coluna_1 = df[df['Away'] == time_1].tail(5).reset_index(drop=True)
 
     # TRATAMENTO DAS VARIÁVEIS
     df_home_coluna_1['Goals_H_FT'] = df_home_coluna_1['Goals_H_FT'].astype(int) 
