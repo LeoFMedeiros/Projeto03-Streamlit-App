@@ -1,5 +1,5 @@
 import streamlit as st
-
+import pandas as pd
 def apresentacao():
     # PARTE SUPEIOR DA PÁGINA DE APRESENTAÇÃO DO AUTOR
     col1, col2 = st.columns([1,3])
@@ -85,11 +85,158 @@ def apresentacao():
 
 
 
-def financas():
-    st.title('EM CONSTRUÇÃO')
-
 def futebol():
-    st.title('EM CONSTRUÇÃO')
+    # TÍTULO DA PÁGINA
+    st.title('ANÁLISE DE TIMES')
+    st.subheader('A fonte de dados utilizada na construção desse relatório foi pelo site: https://www.football-data.co.uk \n\n- Ultima atualização: 27/11/2022')
+    st.markdown('---')
+    # BAIXANDO BASE DE DADOS
+    df = pd.read_csv('base_de_dados.csv')
+    
+    # ORDENANDO PELO NOME DA LIGA
+    df = df.sort_values('League')
+
+    # CRIANDO LISTA DO SELECTBOX DAS LIGAS
+    ligas_list = list(df['League'].unique())
+
+    # COLUNAS PARA SELECIONAR LIGA E TIME
+    col1, col2 = st.columns(2)
+
+    # COLUNA 1
+    with col1:
+        # SELECTBOX DAS LIGAS
+        liga = st.selectbox('Escolha a liga', ligas_list)
+        
+        # FILTRANDO TIMES DE ACORDO COM A LIGA
+        times = df[df['League'] == liga].sort_values('Home')
+        times = list(times['Home'].unique())
+
+    # COLUNA 2   
+    with col2:
+        # SELECTBOX DOS TIMES
+        time_1 = st.selectbox('Escolha o time da análise', times)
+
+    # FILTRAGEM DOS ÚTIMOS 5 JOGOS DOS TIMES EM CASA E FORA
+    df_home_coluna_1 = df[df['Home'] == time_1].tail(5).reset_index(drop=True)
+    df_away_coluna_1 = df[df['Away'] == time_1].tail(5).reset_index(drop=True)
+
+    # TRATAMENTO DAS VARIÁVEIS
+    df_home_coluna_1['Goals_H_FT'] = df_home_coluna_1['Goals_H_FT'].astype(int) 
+    df_home_coluna_1['Goals_A_FT'] = df_home_coluna_1['Goals_A_FT'].astype(int) 
+    df_home_coluna_1['Date'] = pd.to_datetime(df_home_coluna_1['Date']).dt.strftime('%d/%m/%Y')
+
+    df_away_coluna_1['Goals_H_FT'] = df_away_coluna_1['Goals_H_FT'].astype(int) 
+    df_away_coluna_1['Goals_A_FT'] = df_away_coluna_1['Goals_A_FT'].astype(int) 
+    df_away_coluna_1['Date'] = pd.to_datetime(df_away_coluna_1['Date']).dt.strftime('%d/%m/%Y')
+
+    # SUBTITULO
+    st.markdown('---')
+    st.subheader('Análise dos últimos 5 jogos em casa')
+
+    # CRIANDO VARRÁVEIS PARA APRESENTAR NO ST.MATRICS
+    quantidade_de_vitorias = len(df_home_coluna_1[df_home_coluna_1['Result_FT'] == 'H'])
+    media_de_pontos = df_home_coluna_1.iloc[-1]['Media_Pontos_H']
+    media_de_gols_feitos = df_home_coluna_1.iloc[-1]['Media_Gols_Feitos_Home']
+    media_de_gols_sofridos = df_home_coluna_1.iloc[-1]['Media_Gols_Sofridos_Home']
+    media_de_05ft = df_home_coluna_1.iloc[-1]['Porc_Over05FT_Home']
+    media_de_15ft = df_home_coluna_1.iloc[-1]['Porc_Over15FT_Home']
+    media_de_25ft = df_home_coluna_1.iloc[-1]['Porc_Over25FT_Home']
+    media_de_btts = df_home_coluna_1.iloc[-1]['Porc_BTTS_Home']
+
+    # CRIANDO 4 COLUNAS
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(label='Quntidade de Vitórias', value=quantidade_de_vitorias)
+    
+    with col2:
+        st.metric(label='Média de pontos em casa', value=media_de_pontos)
+
+    with col3:
+        st.metric(label='Média de Gols Feitos', value=media_de_gols_feitos)
+
+    with col4:
+        st.metric(label='Média de Gols Sofridos', value=media_de_gols_sofridos)
+
+
+    # CRIANDO 4 COLUNAS
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(label='OVER 05FT', value=(str(media_de_05ft) + '%'))
+    
+    with col2:
+        st.metric(label='OVER 15FT', value=(str(media_de_15ft) + '%'))
+
+    with col3:
+        st.metric(label='OVER 25FT', value=(str(media_de_25ft) + '%'))
+
+    with col4:
+        st.metric(label='AMBAS MARCAM', value=(str(media_de_btts) + '%'))
+    
+    # APRESENTAÇÃO DOS ÚLTIMOS JOGOS
+    st.write(df_home_coluna_1[['League', 'Date', 'Home', 'Goals_H_FT', 'Goals_A_FT', 'Away', 'Result_FT']])
+
+
+    # SUBTITULO
+    st.markdown('---')
+    st.subheader('Análise dos últimos 5 jogos fora de casa')
+
+    # CRIANDO VARRÁVEIS PARA APRESENTAR NO ST.MATRICS
+    quantidade_de_vitorias = len(df_away_coluna_1[df_away_coluna_1['Result_FT'] == 'A'])
+    media_de_pontos = df_away_coluna_1.iloc[-1]['Media_Pontos_A']
+    media_de_gols_feitos = df_away_coluna_1.iloc[-1]['Media_Gols_Feitos_Away']
+    media_de_gols_sofridos = df_away_coluna_1.iloc[-1]['Media_Gols_Sofridos_Away']
+    media_de_05ft = df_away_coluna_1.iloc[-1]['Porc_Over05FT_Away']
+    media_de_15ft = df_away_coluna_1.iloc[-1]['Porc_Over15FT_Away']
+    media_de_25ft = df_away_coluna_1.iloc[-1]['Porc_Over25FT_Away']
+    media_de_btts = df_away_coluna_1.iloc[-1]['Porc_BTTS_Away']
+
+    # CRIANDO 4 COLUNAS
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(label='Quntidade de Vitórias', value=quantidade_de_vitorias)
+    
+    with col2:
+        st.metric(label='Média de pontos em fora', value=media_de_pontos)
+
+    with col3:
+        st.metric(label='Média de Gols Feitos', value=media_de_gols_feitos)
+
+    with col4:
+        st.metric(label='Média de Gols Sofridos', value=media_de_gols_sofridos)
+
+
+    # CRIANDO 4 COLUNAS
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(label='OVER 05FT', value=(str(media_de_05ft) + '%'))
+    
+    with col2:
+        st.metric(label='OVER 15FT', value=(str(media_de_15ft) + '%'))
+
+    with col3:
+        st.metric(label='OVER 25FT', value=(str(media_de_25ft) + '%'))
+
+    with col4:
+        st.metric(label='AMBAS MARCAM', value=(str(media_de_btts) + '%'))
+    
+    # APRESENTAÇÃO DOS ÚLTIMOS JOGOS
+    st.write(df_away_coluna_1[['League', 'Date', 'Home', 'Goals_H_FT', 'Goals_A_FT', 'Away', 'Result_FT']])
+
+    
+
+
+
+
+
+
+
+
+
+
 
 # Função principal
 def main_projeto():
@@ -97,13 +244,12 @@ def main_projeto():
     st.sidebar.title('Página de Projetos @LeoFMedeiros')
     st.sidebar.markdown('---')
     
-    paginas = ['Apresentação', 'Finanças', 'Futebol']
+    paginas = ['Apresentação', 'Futebol']
     escolha = st.sidebar.radio('Escolha a Página', paginas)
 
     if escolha == 'Apresentação':
         apresentacao()
-    if escolha == 'Finanças':
-        financas()
+        
     if escolha == 'Futebol':
         futebol()
 
