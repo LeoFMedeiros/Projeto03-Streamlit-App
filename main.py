@@ -95,12 +95,10 @@ def futebol():
     # BAIXANDO BASE DE DADOS
     df = pd.read_csv('base_de_dados.csv')
     
-    # ORDENANDO PELO NOME DA LIGA
-    df = df.sort_values('League')
 
     # CRIANDO LISTA DO SELECTBOX DAS LIGAS
     ligas_list = list(df['League'].unique())
-
+    
     # COLUNAS PARA SELECIONAR LIGA E TIME
     col1, col2 = st.columns(2)
 
@@ -119,8 +117,8 @@ def futebol():
         time_1 = st.selectbox('Escolha o time da análise', times)
 
     # FILTRAGEM DOS ÚTIMOS 5 JOGOS DOS TIMES EM CASA E FORA
-    df_home_coluna_1 = df[df['Home'] == time_1].tail(5).reset_index(drop=True)
-    df_away_coluna_1 = df[df['Away'] == time_1].tail(5).reset_index(drop=True)
+    df_home_coluna_1 = df[df['Home'] == time_1].reset_index(drop=True)
+    df_away_coluna_1 = df[df['Away'] == time_1].reset_index(drop=True)
 
     # TRATAMENTO DAS VARIÁVEIS
     df_home_coluna_1['Goals_H_FT'] = df_home_coluna_1['Goals_H_FT'].astype(int) 
@@ -137,13 +135,13 @@ def futebol():
 
     # CRIANDO VARRÁVEIS PARA APRESENTAR NO ST.MATRICS
     quantidade_de_vitorias = len(df_home_coluna_1[df_home_coluna_1['Result_FT'] == 'H'])
-    media_de_pontos = df_home_coluna_1.iloc[4]['Media_Pontos_H']
-    media_de_gols_feitos = df_home_coluna_1.iloc[4]['Media_Gols_Feitos_Home']
-    media_de_gols_sofridos = df_home_coluna_1.iloc[4]['Media_Gols_Sofridos_Home']
-    media_de_05ft = df_home_coluna_1.iloc[4]['Porc_Over05FT_Home']
-    media_de_15ft = df_home_coluna_1.iloc[4]['Porc_Over15FT_Home']
-    media_de_25ft = df_home_coluna_1.iloc[4]['Porc_Over25FT_Home']
-    media_de_btts = df_home_coluna_1.iloc[4]['Porc_BTTS_Home']
+    media_de_pontos = df_home_coluna_1.iloc[-1]['Media_Pontos_H']
+    media_de_gols_feitos = df_home_coluna_1.iloc[-1]['Media_Gols_Feitos_Home']
+    media_de_gols_sofridos = df_home_coluna_1.iloc[-1]['Media_Gols_Sofridos_Home']
+    media_de_05ft = df_home_coluna_1.iloc[-1]['Porc_Over05FT_Home']
+    media_de_15ft = df_home_coluna_1.iloc[-1]['Porc_Over15FT_Home']
+    media_de_25ft = df_home_coluna_1.iloc[-1]['Porc_Over25FT_Home']
+    media_de_btts = df_home_coluna_1.iloc[-1]['Porc_BTTS_Home']
 
     # CRIANDO 4 COLUNAS
     col1, col2, col3, col4 = st.columns(4)
@@ -177,7 +175,7 @@ def futebol():
         st.metric(label='AMBAS MARCAM', value=(str(media_de_btts) + '%'))
     
     # APRESENTAÇÃO DOS ÚLTIMOS JOGOS
-    st.write(df_home_coluna_1)
+    st.write(df_home_coluna_1[['League', 'Date', 'Home', 'Goals_H_FT', 'Goals_A_FT', 'Away', 'Result_FT']])
 
 
     # SUBTITULO
