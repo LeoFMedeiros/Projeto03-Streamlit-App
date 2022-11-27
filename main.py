@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+
+
 def apresentacao():
     # PARTE SUPEIOR DA PÁGINA DE APRESENTAÇÃO DO AUTOR
     col1, col2 = st.columns([1,3])
@@ -135,28 +137,28 @@ def futebol():
 
     # CRIANDO VARRÁVEIS PARA APRESENTAR NO ST.MATRICS
     quantidade_de_vitorias = len(df_home_coluna_1[df_home_coluna_1['Result_FT'] == 'H'])
-    media_de_pontos = df_home_coluna_1.iloc[-1]['Media_Pontos_H']
-    media_de_gols_feitos = df_home_coluna_1.iloc[-1]['Media_Gols_Feitos_Home']
-    media_de_gols_sofridos = df_home_coluna_1.iloc[-1]['Media_Gols_Sofridos_Home']
-    media_de_05ft = df_home_coluna_1.iloc[-1]['Porc_Over05FT_Home']
-    media_de_15ft = df_home_coluna_1.iloc[-1]['Porc_Over15FT_Home']
-    media_de_25ft = df_home_coluna_1.iloc[-1]['Porc_Over25FT_Home']
-    media_de_btts = df_home_coluna_1.iloc[-1]['Porc_BTTS_Home']
+    media_de_pontos = df_home_coluna_1.iloc[4]['Media_Pontos_H']
+    media_de_gols_feitos = df_home_coluna_1.iloc[4]['Media_Gols_Feitos_Home']
+    media_de_gols_sofridos = df_home_coluna_1.iloc[4]['Media_Gols_Sofridos_Home']
+    media_de_05ft = df_home_coluna_1.iloc[4]['Porc_Over05FT_Home']
+    media_de_15ft = df_home_coluna_1.iloc[4]['Porc_Over15FT_Home']
+    media_de_25ft = df_home_coluna_1.iloc[4]['Porc_Over25FT_Home']
+    media_de_btts = df_home_coluna_1.iloc[4]['Porc_BTTS_Home']
 
     # CRIANDO 4 COLUNAS
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.metric(label='Quntidade de Vitórias', value=quantidade_de_vitorias)
+        st.metric(label='QUANTIDADE DE VITÓRIAS', value=quantidade_de_vitorias)
     
     with col2:
-        st.metric(label='Média de pontos em casa', value=media_de_pontos)
+        st.metric(label='MÉDIA DE PONTOS EM CASA', value=media_de_pontos)
 
     with col3:
-        st.metric(label='Média de Gols Feitos', value=media_de_gols_feitos)
+        st.metric(label='MÉDIA DE GOLS FEITOS', value=media_de_gols_feitos)
 
     with col4:
-        st.metric(label='Média de Gols Sofridos', value=media_de_gols_sofridos)
+        st.metric(label='MÉDIA DE GOLS SOFRIDOS', value=media_de_gols_sofridos)
 
 
     # CRIANDO 4 COLUNAS
@@ -175,7 +177,7 @@ def futebol():
         st.metric(label='AMBAS MARCAM', value=(str(media_de_btts) + '%'))
     
     # APRESENTAÇÃO DOS ÚLTIMOS JOGOS
-    st.write(df_home_coluna_1[['League', 'Date', 'Home', 'Goals_H_FT', 'Goals_A_FT', 'Away', 'Result_FT']])
+    st.write(df_home_coluna_1)
 
 
     # SUBTITULO
@@ -196,16 +198,16 @@ def futebol():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.metric(label='Quntidade de Vitórias', value=quantidade_de_vitorias)
+        st.metric(label='QUANTIDADE DE VITÓRIAS', value=quantidade_de_vitorias)
     
     with col2:
-        st.metric(label='Média de pontos em fora', value=media_de_pontos)
+        st.metric(label='MÉDIA DE PONTOS FORA', value=media_de_pontos)
 
     with col3:
-        st.metric(label='Média de Gols Feitos', value=media_de_gols_feitos)
+        st.metric(label='MÉDIA DE GOLS FEITOS', value=media_de_gols_feitos)
 
     with col4:
-        st.metric(label='Média de Gols Sofridos', value=media_de_gols_sofridos)
+        st.metric(label='MÉDIA DE GOLS FORA', value=media_de_gols_sofridos)
 
 
     # CRIANDO 4 COLUNAS
@@ -249,7 +251,7 @@ def main_projeto():
 
     if escolha == 'Apresentação':
         apresentacao()
-        
+
     if escolha == 'Futebol':
         futebol()
 
