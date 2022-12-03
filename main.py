@@ -417,7 +417,7 @@ def financas():
                 st.write('- **MARGEM LÍQUIDA:**',f"{(info_papel1['Marg_Liquida'][0])}")
                 st.write('- **Dividend Yield:**', f"{info_papel1['Div_Yield'][0]}")
                 st.write('- **CRESCIMENTOS 5 ANOS:**',f"{info_papel1['Cres_Rec_5a'][0]}%")
-        info_papel1
+
         st.markdown('---')
         st.subheader(f'Análise da cotação histórica {papel1}')
         acao = yf.download((papel1 + '.SA'), period='1y')
