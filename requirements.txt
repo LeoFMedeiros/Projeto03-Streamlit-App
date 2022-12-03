@@ -6,3 +6,4 @@ plotly
 seaborn 
 numpy
 datetime 
+scipy 
