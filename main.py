@@ -138,9 +138,9 @@ def back_testing(tickers_IBOV, pesos, valor):
     return [fig, vol_ano, drawdown, sharpe_ratio, retorno_da_carteira, dividendos_recebidos, qtd_de_acoes]
 
 def quantidade_de_acoes_para_comprar(ativos, valor, pesos):
-    acoes = yf.download(ativos, period='1d')['Close']
-    lista = acoes.columns
-    for tick in lista:
+    acoes = yf.download(ativos, period='1y')['Close']
+    acoes = acoes.iloc[-1]
+    for tick in ativos:
         acoes[tick] = ((pesos[tick] * valor)/(acoes[tick]))
     return acoes
 
