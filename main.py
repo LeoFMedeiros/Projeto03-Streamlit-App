@@ -380,7 +380,7 @@ def financas():
 
     if escolha == 'Analisar Fundamentos de Ações':
     
-        st.title('Informações Fundamentalistas das ações e histórico de preços de 1 ano')
+        st.title('Informações Fundamentalistas das ações e cotação histórica')
 
         tickers_IBOV = ['ABEV3', 'ALPA4', 'AMER3', 'ASAI3', 'AZUL4', 'B3SA3', 'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'BEEF3', 
                 'BPAC11', 'BPAN4', 'BRAP4', 'BRFS3', 'BRKM5', 'BRML3', 'CASH3', 'CCRO3', 'CIEL3', 'CMIG4', 'CMIN3', 
@@ -476,13 +476,16 @@ def financas():
         acao = yf.download((papel1 + '.SA'), period='5y')
         tamanho = len(acao) - 1
         col1,col2,col3 = st.columns(3)
+
+        menor_cotacao = acao.Close.min()
+        maior_cotacao = acao.Close.max()
     
         with col1:
             st.metric(label='**COTAÇÃO ATUAL**', value=f'R$ {(round(acao.iloc[-1,-2], 2)):,.2f}')
         with col2:
-            st.metric(label='**MAIOR COTAÇÃO**', value=f'R$ {(round(acao.iloc[:,-2].max(), 2)):,.2f}')
+            st.metric(label='**MAIOR COTAÇÃO**', value=f'R$ {(round(maior_cotacao, 2)):,.2f}')
         with col3:
-            st.metric(label='**MENOR COTAÇÃO**', value=f'R$ {(round(acao.iloc[:,-2].min(), 2)):,.2f}')
+            st.metric(label='**MENOR COTAÇÃO**', value=f'R$ {(round(menor_cotacao, 2)):,.2f}')
 
         fig = go.Figure(data=[go.Candlestick(x=acao.index,
                 open=acao['Open'],
