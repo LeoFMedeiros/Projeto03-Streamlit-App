@@ -374,11 +374,11 @@ def futebol():
 def financas():
     with st.expander('ESCOLHA UMA DAS OPÇÕES PARA ESCOLHER SUA ANÁLISE', expanded=True):
         st.subheader('Escolha uma das opções para continuar')
-        opcoes = ['Analisar Fundamentos Ações', 'Análise de setor', 'Backtest']
+        opcoes = ['Analisar Fundamentos de Ações', 'Análise de setor', 'Backtest']
         escolha = st.radio('Escolha uma opção', options=opcoes)
 
 
-    if escolha == 'Analisar Fundamentos Ações':
+    if escolha == 'Analisar Fundamentos de Ações':
     
         st.title('Informações Fundamentalistas das ações e histórico de preços de 1 ano')
 
