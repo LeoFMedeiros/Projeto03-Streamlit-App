@@ -372,284 +372,283 @@ def futebol():
 
     
 def financas():
-    with st.form(key='form1'):
+    with st.expander(key='form1', expanded=True):
         st.subheader('Escolha uma das opções para continuar')
         opcoes = ['Analisar Fundamentos Ações', 'Análise de setor', 'Backtest']
-        escolha = st.selectbox('Escolha uma opção', options=opcoes)
-        submit = st.form_submit_button('Escolha')
+        escolha = st.radio('Escolha uma opção', options=opcoes)
 
-    if submit:
-        if escolha == 'Analisar Fundamentos Ações':
-        
-            st.title('Informações Fundamentalistas das ações e histórico de preços de 1 ano')
 
-            tickers_IBOV = ['ABEV3', 'ALPA4', 'AMER3', 'ASAI3', 'AZUL4', 'B3SA3', 'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'BEEF3', 
-                    'BPAC11', 'BPAN4', 'BRAP4', 'BRFS3', 'BRKM5', 'BRML3', 'CASH3', 'CCRO3', 'CIEL3', 'CMIG4', 'CMIN3', 
-                    'COGN3', 'CPFE3', 'CPLE6', 'CRFB3', 'CSAN3', 'CSNA3', 'CVCB3', 'CYRE3', 'DXCO3', 'ECOR3', 'EGIE3', 
-                    'ELET3', 'ELET6', 'EMBR3', 'ENBR3', 'ENEV3', 'ENGI11', 'EQTL3', 'EZTC3', 'FLRY3', 'GGBR4', 'GOAU4', 
-                    'GOLL4', 'HAPV3', 'HYPE3', 'IGTI11', 'IRBR3', 'ITSA4', 'ITUB4', 'JBSS3', 'JHSF3', 'KLBN11', 
-                    'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
-                    'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
-                    'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
-                    'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
+    if escolha == 'Analisar Fundamentos Ações':
+    
+        st.title('Informações Fundamentalistas das ações e histórico de preços de 1 ano')
 
-            with st.expander('Ativo 1', expanded=True):
-                papel1 = st.selectbox('Selecione o Papel', tickers_IBOV)
-                info_papel1 = fd.get_detalhes_papel(papel1)
-                st.write('**Empresa:**', info_papel1['Empresa'][0])
-                st.write('**Setor:**', info_papel1['Setor'][0])
-                st.write('**Subsetor:**', info_papel1['Subsetor'][0])
-                st.markdown('---')
-                col1, col2 = st.columns(2)
-                with col1:
-                    try:
-                        st.write('- **Valor de Mercado:**',f"R$ {info_papel1['Valor_de_mercado'][0]:,.2f}")
-                    except:
-                        st.write('- **Valor de Mercado:**', "Sem informação")
+        tickers_IBOV = ['ABEV3', 'ALPA4', 'AMER3', 'ASAI3', 'AZUL4', 'B3SA3', 'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'BEEF3', 
+                'BPAC11', 'BPAN4', 'BRAP4', 'BRFS3', 'BRKM5', 'BRML3', 'CASH3', 'CCRO3', 'CIEL3', 'CMIG4', 'CMIN3', 
+                'COGN3', 'CPFE3', 'CPLE6', 'CRFB3', 'CSAN3', 'CSNA3', 'CVCB3', 'CYRE3', 'DXCO3', 'ECOR3', 'EGIE3', 
+                'ELET3', 'ELET6', 'EMBR3', 'ENBR3', 'ENEV3', 'ENGI11', 'EQTL3', 'EZTC3', 'FLRY3', 'GGBR4', 'GOAU4', 
+                'GOLL4', 'HAPV3', 'HYPE3', 'IGTI11', 'IRBR3', 'ITSA4', 'ITUB4', 'JBSS3', 'JHSF3', 'KLBN11', 
+                'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
+                'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
+                'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
+                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
 
-                    try:
-                        st.write('- **Patrimônio Líquido:**', f"R$ {float(info_papel1['Patrim_Liq'][0]):,.2f}")
-                    except:
-                        st.write('- **Patrimônio Líquido:**', "Sem informação")
-
-                    try:
-                        st.write('- **Receita Liq. 12m:**', f"R$ {float(info_papel1['Receita_Liquida_12m'][0]):,.2f}")
-                    except:
-                        st.write('- **Receita Liq. 12m:**', "Sem informação")
-
-                    try:
-                        st.write('- **Dívida Bruta:**', f"R$ {float(info_papel1['Div_Bruta'][0]):,.2f}")
-                    except:
-                        st.write('- **Dívida Bruta:**', "Sem informação")
-                    
-                    try:
-                        st.write('- **Dívida Líquida:**', f"R$ {float(info_papel1['Div_Liquida'][0]):,.2f}")
-                    except:
-                        st.write('- **Dívida Líquida:**', "Sem informação")
-                    
-                    try:
-                        st.write('- **P/L:**', f"{float(info_papel1['PL'][0])/100}")
-                    except:
-                        st.write('- **P/L:**', "Sem informação")
-                    
-                    try:
-                        st.write('- **P/VP:**', f"{float(info_papel1['PVP'][0])/100}")
-                    except:
-                        st.write('- **P/VP:**', "Sem informação")
-
-                with col2:
-                    try:
-                        st.write('- **ROE:**',f"{info_papel1['ROE'][0]}")
-                    except:
-                        st.write('- **ROE:**', "Sem informação")
-                    
-                    try:
-                        st.write('- **GIRO ATIVOS:**',f"{(float(info_papel1['Giro_Ativos'][0])/100)}")
-                    except:
-                        st.write('- **GIRO ATIVOS:**', "Sem informação")
-
-                    try:
-                        st.write('- **EBIT 3 MESES:**',f"R$ {float(info_papel1['EBIT_3m'][0]):,.2f}")
-                    except:
-                        st.write('- **EBIT 3 MESES:**', "Sem informação")
-                    
-                    try:
-                        st.write('- **EBIT 12 MESES:**',f"R$ {float(info_papel1['EBIT_12m'][0]):,.2f}")
-                    except:
-                        st.write('- **EBIT 12 MESES:**', "Sem informação")
-                    
-                    try:
-                        st.write('- **MARGEM LÍQUIDA:**',f"{(info_papel1['Marg_Liquida'][0])}")
-                    except:
-                        st.write('- **MARGEM LÍQUIDA:**', "Sem informação")
-
-                    try:
-                        st.write('- **Dividend Yield:**', f"{info_papel1['Div_Yield'][0]}")
-                    except:
-                        st.write('- **Dividend Yield:**', "Sem informação")
-
-                    try:
-                        st.write('- **CRESCIMENTOS 5 ANOS:**',f"{info_papel1['Cres_Rec_5a'][0]}%")
-                    except:
-                        st.write('- **CRESCIMENTOS 5 ANOS:**', "Sem informação")
+        with st.expander('Ativo 1', expanded=True):
+            papel1 = st.selectbox('Selecione o Papel', tickers_IBOV)
+            info_papel1 = fd.get_detalhes_papel(papel1)
+            st.write('**Empresa:**', info_papel1['Empresa'][0])
+            st.write('**Setor:**', info_papel1['Setor'][0])
+            st.write('**Subsetor:**', info_papel1['Subsetor'][0])
             st.markdown('---')
-            st.subheader(f'Análise da cotação histórica {papel1}')
-            acao = yf.download((papel1 + '.SA'), period='1y')
-            tamanho = len(acao) - 1
-            col1,col2,col3 = st.columns(3)
-        
+            col1, col2 = st.columns(2)
             with col1:
-                st.metric(label='**COTAÇÃO ATUAL**', value=f'R$ {(round(acao.iloc[-1,-2], 2)):,.2f}')
-            with col2:
-                st.metric(label='**MAIOR COTAÇÃO**', value=f'R$ {(round(acao.iloc[:,-2].max(), 2)):,.2f}')
-            with col3:
-                st.metric(label='**MENOR COTAÇÃO**', value=f'R$ {(round(acao.iloc[:,-2].min(), 2)):,.2f}')
+                try:
+                    st.write('- **Valor de Mercado:**',f"R$ {info_papel1['Valor_de_mercado'][0]:,.2f}")
+                except:
+                    st.write('- **Valor de Mercado:**', "Sem informação")
 
-            fig = go.Figure(data=[go.Candlestick(x=acao.index,
-                    open=acao['Open'],
-                    high=acao['High'],
-                    low=acao['Low'],
-                    close=acao['Close'])])
+                try:
+                    st.write('- **Patrimônio Líquido:**', f"R$ {float(info_papel1['Patrim_Liq'][0]):,.2f}")
+                except:
+                    st.write('- **Patrimônio Líquido:**', "Sem informação")
+
+                try:
+                    st.write('- **Receita Liq. 12m:**', f"R$ {float(info_papel1['Receita_Liquida_12m'][0]):,.2f}")
+                except:
+                    st.write('- **Receita Liq. 12m:**', "Sem informação")
+
+                try:
+                    st.write('- **Dívida Bruta:**', f"R$ {float(info_papel1['Div_Bruta'][0]):,.2f}")
+                except:
+                    st.write('- **Dívida Bruta:**', "Sem informação")
+                
+                try:
+                    st.write('- **Dívida Líquida:**', f"R$ {float(info_papel1['Div_Liquida'][0]):,.2f}")
+                except:
+                    st.write('- **Dívida Líquida:**', "Sem informação")
+                
+                try:
+                    st.write('- **P/L:**', f"{float(info_papel1['PL'][0])/100}")
+                except:
+                    st.write('- **P/L:**', "Sem informação")
+                
+                try:
+                    st.write('- **P/VP:**', f"{float(info_papel1['PVP'][0])/100}")
+                except:
+                    st.write('- **P/VP:**', "Sem informação")
+
+            with col2:
+                try:
+                    st.write('- **ROE:**',f"{info_papel1['ROE'][0]}")
+                except:
+                    st.write('- **ROE:**', "Sem informação")
+                
+                try:
+                    st.write('- **GIRO ATIVOS:**',f"{(float(info_papel1['Giro_Ativos'][0])/100)}")
+                except:
+                    st.write('- **GIRO ATIVOS:**', "Sem informação")
+
+                try:
+                    st.write('- **EBIT 3 MESES:**',f"R$ {float(info_papel1['EBIT_3m'][0]):,.2f}")
+                except:
+                    st.write('- **EBIT 3 MESES:**', "Sem informação")
+                
+                try:
+                    st.write('- **EBIT 12 MESES:**',f"R$ {float(info_papel1['EBIT_12m'][0]):,.2f}")
+                except:
+                    st.write('- **EBIT 12 MESES:**', "Sem informação")
+                
+                try:
+                    st.write('- **MARGEM LÍQUIDA:**',f"{(info_papel1['Marg_Liquida'][0])}")
+                except:
+                    st.write('- **MARGEM LÍQUIDA:**', "Sem informação")
+
+                try:
+                    st.write('- **Dividend Yield:**', f"{info_papel1['Div_Yield'][0]}")
+                except:
+                    st.write('- **Dividend Yield:**', "Sem informação")
+
+                try:
+                    st.write('- **CRESCIMENTOS 5 ANOS:**',f"{info_papel1['Cres_Rec_5a'][0]}%")
+                except:
+                    st.write('- **CRESCIMENTOS 5 ANOS:**', "Sem informação")
+        st.markdown('---')
+        st.subheader(f'Análise da cotação histórica {papel1}')
+        acao = yf.download((papel1 + '.SA'), period='1y')
+        tamanho = len(acao) - 1
+        col1,col2,col3 = st.columns(3)
+    
+        with col1:
+            st.metric(label='**COTAÇÃO ATUAL**', value=f'R$ {(round(acao.iloc[-1,-2], 2)):,.2f}')
+        with col2:
+            st.metric(label='**MAIOR COTAÇÃO**', value=f'R$ {(round(acao.iloc[:,-2].max(), 2)):,.2f}')
+        with col3:
+            st.metric(label='**MENOR COTAÇÃO**', value=f'R$ {(round(acao.iloc[:,-2].min(), 2)):,.2f}')
+
+        fig = go.Figure(data=[go.Candlestick(x=acao.index,
+                open=acao['Open'],
+                high=acao['High'],
+                low=acao['Low'],
+                close=acao['Close'])])
+        fig
+
+    if escolha == 'Análise de setor':
+        tickers_IBOV = ['ABEV3', 'ALPA4', 'AMER3', 'ASAI3', 'AZUL4', 'B3SA3', 'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'BEEF3', 
+                'BPAC11', 'BPAN4', 'BRAP4', 'BRFS3', 'BRKM5', 'BRML3', 'CASH3', 'CCRO3', 'CIEL3', 'CMIG4', 'CMIN3', 
+                'COGN3', 'CPFE3', 'CPLE6', 'CRFB3', 'CSAN3', 'CSNA3', 'CVCB3', 'CYRE3', 'DXCO3', 'ECOR3', 'EGIE3', 
+                'ELET3', 'ELET6', 'EMBR3', 'ENBR3', 'ENEV3', 'ENGI11', 'EQTL3', 'EZTC3', 'FLRY3', 'GGBR4', 'GOAU4', 
+                'GOLL4', 'HAPV3', 'HYPE3', 'IGTI11', 'IRBR3', 'ITSA4', 'ITUB4', 'JBSS3', 'JHSF3', 'KLBN11', 
+                'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
+                'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
+                'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
+                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
+
+
+        st.title('ANÁLISE DAS AÇÕES POR SETOR')
+        tabela_ref = pd.read_excel('tabela_de_acoes_ref.xlsx')
+        tabela = pd.DataFrame()
+        for i in tickers_IBOV:
+            intermediario = tabela_ref[tabela_ref['Ticker'] == i]
+            tabela = pd.concat([tabela, intermediario])
+        tabela_ref = tabela.reset_index(drop=True)
+        # ESCOLHENDO O SETOR DE ANÁLISE PARA GERAR OS GRÁFICOS
+        setores = tabela_ref.Setor.unique()
+        valor = st.selectbox('INFORME O SETOR QUE DESEJA ANALISAR', setores)
+        
+        setor = list(tabela_ref[tabela_ref['Setor'] == valor]['Ticker'])
+        analise_setor = pd.DataFrame()
+        for i in setor:
+            df = fd.get_resultado_raw()
+            df = df[df.index == i]
+            analise_setor = pd.concat([analise_setor, df])
+
+        analise_setor.dropna(inplace=True)
+        fig1 = make_subplots(rows=1,
+                    cols=2,
+                    subplot_titles=('P/VP', 'P/L'),
+                    shared_xaxes=False)
+        fig1.add_trace(go.Bar(x=analise_setor.index, y=analise_setor['P/VP']), row=1, col=1)
+        fig1.add_trace(go.Bar(x=analise_setor.index, y=analise_setor['P/L']), row=1, col=2)
+        fig1.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
+                    template='plotly_dark',#template pré-definido da plotly
+                    showlegend=False, #esconder ou mostrar legenda
+                    ) #largura
+        fig1
+
+        fig2 = make_subplots(rows=1,
+                    cols=2,
+                    subplot_titles=('Div.Yield', 'P/Ativo'),
+                    shared_xaxes=False)
+        fig2.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Div.Yield']), row=1, col=1)
+        fig2.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'P/Ativo']), row=1, col=2)
+        fig2.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
+                    template='plotly_dark',#template pré-definido da plotly
+                    showlegend=False, #esconder ou mostrar legenda
+                    ) #largura
+        fig2
+
+        fig3 = make_subplots(rows=1,
+                    cols=2,
+                    subplot_titles=('Mrg Ebit', 'Mrg. Líq.'),
+                    shared_xaxes=False)
+        fig3.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Mrg Ebit']), row=1, col=1)
+        fig3.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Mrg. Líq.']), row=1, col=2)
+        fig3.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
+                    template='plotly_dark',#template pré-definido da plotly
+                    showlegend=False, #esconder ou mostrar legenda
+                    ) #largura
+        fig3
+
+        fig4 = make_subplots(rows=1,
+                    cols=2,
+                    subplot_titles=('Patrim. Líq', 'Dív.Brut/ Patrim.'),
+                    shared_xaxes=False)
+        fig4.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Patrim. Líq']), row=1, col=1)
+        fig4.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Dív.Brut/ Patrim.']), row=1, col=2)
+        fig4.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
+                    template='plotly_dark',#template pré-definido da plotly
+                    showlegend=False, #esconder ou mostrar legenda
+                    ) #largura
+        fig4
+        
+        fig5 = make_subplots(rows=1,
+                    cols=2,
+                    subplot_titles=('ROE', 'P/EBIT'),
+                    shared_xaxes=False)
+        fig5.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'ROE']), row=1, col=1)
+        fig5.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'P/EBIT']), row=1, col=2)
+        fig5.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
+                    template='plotly_dark',#template pré-definido da plotly
+                    showlegend=False, #esconder ou mostrar legenda
+                    ) #largura
+        fig5
+    
+    if escolha == 'Backtest':
+        st.subheader('Modelo de otimização de portifólio HRP(Hierarchical Risk Parity)')
+        st.markdown('O Hierarchical Risk Parity (HRP) é um algoritmo de otimização de portfólios desenvolvido por Marcos Lopez de Prado. Esse otimizador combina teoria de grafos e machine learning para construir uma carteira diversificada com soluções estáveis.')
+        st.markdown('---')
+
+        tickers_IBOV = ['ABEV3', 'ALPA4', 'AMER3', 'ASAI3', 'AZUL4', 'B3SA3', 'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'BEEF3', 
+                'BPAC11', 'BPAN4', 'BRAP4', 'BRFS3', 'BRKM5', 'BRML3', 'CASH3', 'CCRO3', 'CIEL3', 'CMIG4', 'CMIN3', 
+                'COGN3', 'CPFE3', 'CPLE6', 'CRFB3', 'CSAN3', 'CSNA3', 'CVCB3', 'CYRE3', 'DXCO3', 'ECOR3', 'EGIE3', 
+                'ELET3', 'ELET6', 'EMBR3', 'ENBR3', 'ENEV3', 'ENGI11', 'EQTL3', 'EZTC3', 'FLRY3', 'GGBR4', 'GOAU4', 
+                'GOLL4', 'HAPV3', 'HYPE3', 'IGTI11', 'IRBR3', 'ITSA4', 'ITUB4', 'JBSS3', 'JHSF3', 'KLBN11', 
+                'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
+                'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
+                'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
+                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
+        tickers_IBOV = [ticker + '.SA' for ticker in tickers_IBOV]
+
+        with st.form(key='form2'):
+            st.subheader('ESCOLHA AS AÇÕES PARA CONTINUAR')
+            opcoes = ['Análise de uma ação', 'Análise de setor', 'Backtest']
+            ativos = st.multiselect('Escolha uma opção', options=tickers_IBOV)
+            valor = st.number_input(label='INFORME O VALOR DE INVESTIMENTO NO PORTIFÓLIO')
+            otimizacao = st.form_submit_button('Otimização')
+        st.markdown('---')
+        
+        if otimizacao and len(ativos) > 0:
+            with st.spinner('FAZENDO O BACKTEST'):
+                # BACKTEST
+                acoes = baixar_cotacoes_acoes(ativos)
+                matriz_covarianca, colunas_seriation = matrix_seriation(acoes)
+                pesos = calcula_pesos_hrp(matriz_covarianca, colunas_seriation)
+                fig, vol_ano, drawdown, sharpe_ratio, retorno_da_carteira, dividendo, qtd_de_acoes = back_testing(ativos, pesos, valor)
+
+            col1, col2, col3, col4, col5 = st.columns(5)
+
+            with col1:
+                st.metric(label='RETORNO DO PORTIFÓLIO', value=f'{round((retorno_da_carteira * 100),2)}%')
+            with col2:
+                st.metric(label='DIVIDENDOS RECEBIDOS', value=f'R$ {round((dividendo), 2):,.2f}')
+            with col3:
+                st.metric(label='VOLATILIDADE', value=f'{round((vol_ano[0][0]),2)}')
+            with col4:
+                st.metric(label='MÁXIMO DRAWDOWN', value=f'{round((drawdown), 2)}')
+            with col5:
+                st.metric(label='SHARPE RATIO', value=f'{round((sharpe_ratio[0][0]), 2)}')
+            
             fig
 
-        if escolha == 'Análise de setor':
-            tickers_IBOV = ['ABEV3', 'ALPA4', 'AMER3', 'ASAI3', 'AZUL4', 'B3SA3', 'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'BEEF3', 
-                    'BPAC11', 'BPAN4', 'BRAP4', 'BRFS3', 'BRKM5', 'BRML3', 'CASH3', 'CCRO3', 'CIEL3', 'CMIG4', 'CMIN3', 
-                    'COGN3', 'CPFE3', 'CPLE6', 'CRFB3', 'CSAN3', 'CSNA3', 'CVCB3', 'CYRE3', 'DXCO3', 'ECOR3', 'EGIE3', 
-                    'ELET3', 'ELET6', 'EMBR3', 'ENBR3', 'ENEV3', 'ENGI11', 'EQTL3', 'EZTC3', 'FLRY3', 'GGBR4', 'GOAU4', 
-                    'GOLL4', 'HAPV3', 'HYPE3', 'IGTI11', 'IRBR3', 'ITSA4', 'ITUB4', 'JBSS3', 'JHSF3', 'KLBN11', 
-                    'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
-                    'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
-                    'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
-                    'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
+            col1, col2 = st.columns(2)
 
+            with col1:
+                st.markdown('PESOS DAS AÇÕES NO BACKTES')
+                for ativo in ativos:
+                    st.markdown(f'**{ativo}**: \n- Peso na carteira: {round((pesos[ativo]*100), 2)}% \n- Quantidade de ações: {int(qtd_de_acoes[ativo])}')
 
-            st.title('ANÁLISE DAS AÇÕES POR SETOR')
-            tabela_ref = pd.read_excel('tabela_de_acoes_ref.xlsx')
-            tabela = pd.DataFrame()
-            for i in tickers_IBOV:
-                intermediario = tabela_ref[tabela_ref['Ticker'] == i]
-                tabela = pd.concat([tabela, intermediario])
-            tabela_ref = tabela.reset_index(drop=True)
-            # ESCOLHENDO O SETOR DE ANÁLISE PARA GERAR OS GRÁFICOS
-            setores = tabela_ref.Setor.unique()
-            valor = st.selectbox('INFORME O SETOR QUE DESEJA ANALISAR', setores)
-            
-            setor = list(tabela_ref[tabela_ref['Setor'] == valor]['Ticker'])
-            analise_setor = pd.DataFrame()
-            for i in setor:
-                df = fd.get_resultado_raw()
-                df = df[df.index == i]
-                analise_setor = pd.concat([analise_setor, df])
-
-            analise_setor.dropna(inplace=True)
-            fig1 = make_subplots(rows=1,
-                        cols=2,
-                        subplot_titles=('P/VP', 'P/L'),
-                        shared_xaxes=False)
-            fig1.add_trace(go.Bar(x=analise_setor.index, y=analise_setor['P/VP']), row=1, col=1)
-            fig1.add_trace(go.Bar(x=analise_setor.index, y=analise_setor['P/L']), row=1, col=2)
-            fig1.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
-                        template='plotly_dark',#template pré-definido da plotly
-                        showlegend=False, #esconder ou mostrar legenda
-                        ) #largura
-            fig1
-
-            fig2 = make_subplots(rows=1,
-                        cols=2,
-                        subplot_titles=('Div.Yield', 'P/Ativo'),
-                        shared_xaxes=False)
-            fig2.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Div.Yield']), row=1, col=1)
-            fig2.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'P/Ativo']), row=1, col=2)
-            fig2.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
-                        template='plotly_dark',#template pré-definido da plotly
-                        showlegend=False, #esconder ou mostrar legenda
-                        ) #largura
-            fig2
-
-            fig3 = make_subplots(rows=1,
-                        cols=2,
-                        subplot_titles=('Mrg Ebit', 'Mrg. Líq.'),
-                        shared_xaxes=False)
-            fig3.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Mrg Ebit']), row=1, col=1)
-            fig3.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Mrg. Líq.']), row=1, col=2)
-            fig3.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
-                        template='plotly_dark',#template pré-definido da plotly
-                        showlegend=False, #esconder ou mostrar legenda
-                        ) #largura
-            fig3
-
-            fig4 = make_subplots(rows=1,
-                        cols=2,
-                        subplot_titles=('Patrim. Líq', 'Dív.Brut/ Patrim.'),
-                        shared_xaxes=False)
-            fig4.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Patrim. Líq']), row=1, col=1)
-            fig4.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'Dív.Brut/ Patrim.']), row=1, col=2)
-            fig4.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
-                        template='plotly_dark',#template pré-definido da plotly
-                        showlegend=False, #esconder ou mostrar legenda
-                        ) #largura
-            fig4
-            
-            fig5 = make_subplots(rows=1,
-                        cols=2,
-                        subplot_titles=('ROE', 'P/EBIT'),
-                        shared_xaxes=False)
-            fig5.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'ROE']), row=1, col=1)
-            fig5.add_trace(go.Bar(x=analise_setor.index, y=analise_setor.loc[:, 'P/EBIT']), row=1, col=2)
-            fig5.update_layout(title_text=f'<b>Avaliação Fundamentalista do setor: {valor}<b>', 
-                        template='plotly_dark',#template pré-definido da plotly
-                        showlegend=False, #esconder ou mostrar legenda
-                        ) #largura
-            fig5
-        
-        if escolha == 'Backtest':
-            st.subheader('Modelo de otimização de portifólio HRP(Hierarchical Risk Parity)')
-            st.markdown('O Hierarchical Risk Parity (HRP) é um algoritmo de otimização de portfólios desenvolvido por Marcos Lopez de Prado. Esse otimizador combina teoria de grafos e machine learning para construir uma carteira diversificada com soluções estáveis.')
-            st.markdown('---')
-
-            tickers_IBOV = ['ABEV3', 'ALPA4', 'AMER3', 'ASAI3', 'AZUL4', 'B3SA3', 'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'BEEF3', 
-                    'BPAC11', 'BPAN4', 'BRAP4', 'BRFS3', 'BRKM5', 'BRML3', 'CASH3', 'CCRO3', 'CIEL3', 'CMIG4', 'CMIN3', 
-                    'COGN3', 'CPFE3', 'CPLE6', 'CRFB3', 'CSAN3', 'CSNA3', 'CVCB3', 'CYRE3', 'DXCO3', 'ECOR3', 'EGIE3', 
-                    'ELET3', 'ELET6', 'EMBR3', 'ENBR3', 'ENEV3', 'ENGI11', 'EQTL3', 'EZTC3', 'FLRY3', 'GGBR4', 'GOAU4', 
-                    'GOLL4', 'HAPV3', 'HYPE3', 'IGTI11', 'IRBR3', 'ITSA4', 'ITUB4', 'JBSS3', 'JHSF3', 'KLBN11', 
-                    'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
-                    'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
-                    'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
-                    'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
-            tickers_IBOV = [ticker + '.SA' for ticker in tickers_IBOV]
-
-            with st.form(key='form2'):
-                st.subheader('ESCOLHA AS AÇÕES PARA CONTINUAR')
-                opcoes = ['Análise de uma ação', 'Análise de setor', 'Backtest']
-                ativos = st.multiselect('Escolha uma opção', options=tickers_IBOV)
-                valor = st.number_input(label='INFORME O VALOR DE INVESTIMENTO NO PORTIFÓLIO')
-                otimizacao = st.form_submit_button('Otimização')
-            st.markdown('---')
-            
-            if otimizacao and len(ativos) > 0:
-                with st.spinner('FAZENDO O BACKTEST'):
-                    # BACKTEST
-                    acoes = baixar_cotacoes_acoes(ativos)
+            with col2:
+                st.markdown('NOVA OTIMIZAÇÃO DE PORTIFÓLIO')
+                with st.spinner('GERANDO UM NOVO BACKTEST'):
+                # BACKTEST
+                    acoes = yf.download(ativos, period='2y')['Adj Close']
+                    acoes = acoes.pct_change().dropna()
                     matriz_covarianca, colunas_seriation = matrix_seriation(acoes)
                     pesos = calcula_pesos_hrp(matriz_covarianca, colunas_seriation)
-                    fig, vol_ano, drawdown, sharpe_ratio, retorno_da_carteira, dividendo, qtd_de_acoes = back_testing(ativos, pesos, valor)
+                    #fig, vol_ano, drawdown, sharpe_ratio, retorno_da_carteira = back_testing(ativos, pesos)
+                    qtd_de_acoes = quantidade_de_acoes_para_comprar(ativos, valor, pesos)
 
-                col1, col2, col3, col4, col5 = st.columns(5)
-
-                with col1:
-                    st.metric(label='RETORNO DO PORTIFÓLIO', value=f'{round((retorno_da_carteira * 100),2)}%')
-                with col2:
-                    st.metric(label='DIVIDENDOS RECEBIDOS', value=f'R$ {round((dividendo), 2):,.2f}')
-                with col3:
-                    st.metric(label='VOLATILIDADE', value=f'{round((vol_ano[0][0]),2)}')
-                with col4:
-                    st.metric(label='MÁXIMO DRAWDOWN', value=f'{round((drawdown), 2)}')
-                with col5:
-                    st.metric(label='SHARPE RATIO', value=f'{round((sharpe_ratio[0][0]), 2)}')
-                
-                fig
-
-                col1, col2 = st.columns(2)
-
-                with col1:
-                    st.markdown('PESOS DAS AÇÕES NO BACKTES')
-                    for ativo in ativos:
-                        st.markdown(f'**{ativo}**: \n- Peso na carteira: {round((pesos[ativo]*100), 2)}% \n- Quantidade de ações: {int(qtd_de_acoes[ativo])}')
-
-                with col2:
-                    st.markdown('NOVA OTIMIZAÇÃO DE PORTIFÓLIO')
-                    with st.spinner('GERANDO UM NOVO BACKTEST'):
-                    # BACKTEST
-                        acoes = yf.download(ativos, period='2y')['Adj Close']
-                        acoes = acoes.pct_change().dropna()
-                        matriz_covarianca, colunas_seriation = matrix_seriation(acoes)
-                        pesos = calcula_pesos_hrp(matriz_covarianca, colunas_seriation)
-                        #fig, vol_ano, drawdown, sharpe_ratio, retorno_da_carteira = back_testing(ativos, pesos)
-                        qtd_de_acoes = quantidade_de_acoes_para_comprar(ativos, valor, pesos)
-
-                    for ativo in ativos:
-                        st.markdown(f'**{ativo}**: \n- Peso na carteira: {round((pesos[ativo]*100), 2)}% \n- Quantidade de ações: {int(qtd_de_acoes[ativo])}')
+                for ativo in ativos:
+                    st.markdown(f'**{ativo}**: \n- Peso na carteira: {round((pesos[ativo]*100), 2)}% \n- Quantidade de ações: {int(qtd_de_acoes[ativo])}')
 
 # Função principal
 def main_projeto():
