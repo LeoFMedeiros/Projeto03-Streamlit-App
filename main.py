@@ -390,7 +390,7 @@ def financas():
                 'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
                 'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
                 'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
-                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
+                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE3']
 
         with st.expander('Ativo 1', expanded=True):
             papel1 = st.selectbox('Selecione o Papel', tickers_IBOV)
@@ -500,7 +500,7 @@ def financas():
                 'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
                 'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
                 'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
-                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
+                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE3']
 
 
         st.title('ANÁLISE DAS AÇÕES POR SETOR')
@@ -595,7 +595,7 @@ def financas():
                 'LREN3', 'LWSA3', 'MGLU3', 'MRFG3', 'MRVE3', 'MULT3', 'NTCO3', 'PCAR3', 'PETR3', 'PETR4', 'PETZ3', 
                 'POSI3', 'PRIO3', 'QUAL3', 'RADL3', 'RAIL3', 'RDOR3', 'RENT3', 'RRRP3', 'SANB11', 'SBSP3', 'SLCE3', 
                 'SOMA3', 'SULA11', 'SUZB3', 'TAEE11', 'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VALE3', 'VBBR3', 'VIIA3', 
-                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE']
+                'VIVT3', 'WEGE3', 'YDUQ3', 'LEVE3', 'MTRE3', 'NEO3', 'RANI3', 'CXSE3']
         tickers_IBOV = [ticker + '.SA' for ticker in tickers_IBOV]
 
         with st.form(key='form2'):
