@@ -489,7 +489,7 @@ def financas():
                 high=acao['High'],
                 low=acao['Low'],
                 close=acao['Close'])])
-        fig
+        st.plotly_chart(fig, theme=None, use_container_width=True)
 
     if escolha == 'Análise de setor':
         tickers_IBOV = ['ABEV3', 'ALPA4', 'AMER3', 'ASAI3', 'AZUL4', 'B3SA3', 'BBAS3', 'BBDC3', 'BBDC4', 'BBSE3', 'BEEF3', 
@@ -532,7 +532,7 @@ def financas():
                     template='plotly_dark',#template pré-definido da plotly
                     showlegend=False, #esconder ou mostrar legenda
                     ) #largura
-        fig1
+        st.plotly_chart(fig1, theme=None, use_container_width=True)
 
         fig2 = make_subplots(rows=1,
                     cols=2,
@@ -544,7 +544,7 @@ def financas():
                     template='plotly_dark',#template pré-definido da plotly
                     showlegend=False, #esconder ou mostrar legenda
                     ) #largura
-        fig2
+        st.plotly_chart(fig2, theme=None, use_container_width=True)
 
         fig3 = make_subplots(rows=1,
                     cols=2,
@@ -556,7 +556,7 @@ def financas():
                     template='plotly_dark',#template pré-definido da plotly
                     showlegend=False, #esconder ou mostrar legenda
                     ) #largura
-        fig3
+        st.plotly_chart(fig3, theme=None, use_container_width=True)
 
         fig4 = make_subplots(rows=1,
                     cols=2,
@@ -568,7 +568,7 @@ def financas():
                     template='plotly_dark',#template pré-definido da plotly
                     showlegend=False, #esconder ou mostrar legenda
                     ) #largura
-        fig4
+        st.plotly_chart(fig4, theme=None, use_container_width=True)
         
         fig5 = make_subplots(rows=1,
                     cols=2,
@@ -580,7 +580,7 @@ def financas():
                     template='plotly_dark',#template pré-definido da plotly
                     showlegend=False, #esconder ou mostrar legenda
                     ) #largura
-        fig5
+        st.plotly_chart(fig5, theme=None, use_container_width=True)
     
     if escolha == 'Backtest':
         st.subheader('Modelo de otimização de portifólio HRP(Hierarchical Risk Parity)')
@@ -627,7 +627,7 @@ def financas():
             with col5:
                 st.metric(label='SHARPE RATIO', value=f'{round((sharpe_ratio[0][0]), 2)}')
             
-            fig
+            st.plotly_chart(fig, theme=None, use_container_width=True)
 
             col1, col2 = st.columns(2)
 
