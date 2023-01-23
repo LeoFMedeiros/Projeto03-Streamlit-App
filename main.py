@@ -372,7 +372,7 @@ def futebol():
 
     
 def financas():
-    with st.expander(key='form1', expanded=True):
+    with st.expander('ESCOLHA UMA DAS OPÇÕES PARA ESCOLHER SUA ANÁLISE', expanded=True):
         st.subheader('Escolha uma das opções para continuar')
         opcoes = ['Analisar Fundamentos Ações', 'Análise de setor', 'Backtest']
         escolha = st.radio('Escolha uma opção', options=opcoes)
