@@ -473,7 +473,7 @@ def financas():
                     st.write('- **CRESCIMENTOS 5 ANOS:**', "Sem informação")
         st.markdown('---')
         st.subheader(f'Análise da cotação histórica {papel1}')
-        acao = yf.download((papel1 + '.SA'), period='1y')
+        acao = yf.download((papel1 + '.SA'), period='5y')
         tamanho = len(acao) - 1
         col1,col2,col3 = st.columns(3)
     
