@@ -617,18 +617,23 @@ def financas():
                 pesos = calcula_pesos_hrp(matriz_covarianca, colunas_seriation)
                 fig, vol_ano, drawdown, sharpe_ratio, retorno_da_carteira, dividendo, qtd_de_acoes = back_testing(ativos, pesos, valor)
 
+            valor_final = valor + (valor*retorno_da_carteira)
+            dy_portifolio = dividendo/valor
+
             col1, col2, col3, col4, col5 = st.columns(5)
 
             with col1:
-                st.metric(label='RETORNO DO PORTIFÓLIO', value=f'{round((retorno_da_carteira * 100),2)}%')
+                st.metric(label='VALOR FINAL', value=f'R$ {round((valor_final), 2):,.2f}')
             with col2:
-                st.metric(label='DIVIDENDOS RECEBIDOS', value=f'R$ {round((dividendo), 2):,.2f}')
+                st.metric(label='RETORNO DO PORTIFÓLIO', value=f'{round((retorno_da_carteira * 100),2)}%')
             with col3:
-                st.metric(label='VOLATILIDADE', value=f'{round((vol_ano[0][0]),2)}')
+                st.metric(label='DY DO PORTIFÓLIO', value=f'{round((dy_portifolio * 100),2)}%')
             with col4:
-                st.metric(label='MÁXIMO DRAWDOWN', value=f'{round((drawdown), 2)}')
+                st.metric(label='DIVIDENDOS RECEBIDOS', value=f'R$ {round((dividendo), 2):,.2f}')
             with col5:
-                st.metric(label='SHARPE RATIO', value=f'{round((sharpe_ratio[0][0]), 2)}')
+                st.metric(label='VOLATILIDADE', value=f'{round((vol_ano[0][0]),2)}')
+
+
             
             st.plotly_chart(fig, theme=None, use_container_width=True)
 
